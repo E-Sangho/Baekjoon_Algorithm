@@ -3,7 +3,7 @@
 int main(){
     int N, temp = 0, max = 0;
     scanf("%d", &N);
-    int C[10000] = {0};
+    int C[10001] = {0,};
     for(int i = 0; i < N; ++i){
         scanf("%d", &temp);
         ++C[temp];
@@ -11,7 +11,8 @@ int main(){
     }
     for(int i = 0; i <= max; ++i){
         for(int j = 0; j < C[i]; ++j){
-            printf("%d ", i);       
+            printf("%d\n", i);       
         }
     }
 }
+
