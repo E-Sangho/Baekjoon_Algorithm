@@ -1,43 +1,59 @@
 #include <iostream>
 #include <queue>
-
+#include <vector>
+#include <algorithm>
 using namespace std;
 
+bool compare(const int i, const int j)
+{
+    return i > j;
+}
 int main()
 {
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
+
     int T;
     cin >> T;
+
     for(int i = 0; i < T; ++i)
     {
-        int N, M;
-        vector<int> order;
-        queue<char> q;
+        int N, M, count = 0;
         cin >> N >> M;
-        for(char j = 0; j <= N; ++j)
+        queue<int> q;
+        queue<int> letter;
+        vector<int> v;
+        for(int j = 0; j < N; ++j)
         {
             int temp;
             cin >> temp;
-            order.push_back(temp);
-            q.push('A' + j);
+            v.push_back(temp);
+            q.push(temp);
+            letter.push(j);
         }
-
+        sort(v.begin(),v.end(), compare);
         while(!q.empty())
         {
-            if(order.front() > order[M])
+            if(v.front() == q.front())
             {
-                order.erase(order.begin());
+                ++count;
+                if(letter.front() == M)
+                {
+                    cout << count << '\n';
+                    break;
+                }
+                v.erase(v.begin());
                 q.pop();
+                letter.pop();
             }
-            else if(order.front() < order[M]);
-            {
-                order.push_back(order.front());
-                order.erase(order.begin());
+            else{
                 q.push(q.front());
                 q.pop();
+                letter.push(letter.front());
+                letter.pop();
             }
         }
     }
-    
-
     return 0;
 }
