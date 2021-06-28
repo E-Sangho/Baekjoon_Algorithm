@@ -1,55 +1,91 @@
 #include <iostream>
 #include <deque>
 #include <string>
+
 using namespace std;
-int main() {
+
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
     int N;
-    deque<int> dq;
     cin >> N;
-    cin.ignore();
-    for (int i = 0; i < N; ++i) {
-        string text;
-        getline(cin, text);
-        if (text == "front") {
-            if (dq.empty()) cout << -1 << "\n";
-            else cout << dq.front() << "\n";
+
+    deque<int> deq;
+
+    for(int i = 0; i < N; ++i)
+    {
+        string str;
+        cin >> str;
+        if(str == "push_front")
+        {
+            int temp;
+            cin >> temp;
+            deq.push_front(temp);
         }
-        else if (text == "back") {
-            if (dq.empty()) cout << -1 << "\n";
-            else cout << dq.back() << "\n";
+        else if(str == "push_back")
+        {
+            int temp;
+            cin >> temp;
+            deq.push_back(temp);
         }
-        else if (text[1] == 'u') { // push
-            string backup = text;
-            if (text[5] == 'f') { //push_front
-                int x = stoi(backup.erase(0, 10));
-                dq.push_front(x);
+        else if(str == "pop_front")
+        {
+            if(deq.empty())
+            {
+                cout << "-1\n";
             }
-            else { // push_back
-                int x = stoi(backup.erase(0, 9));
-                dq.push_back(x);
+            else
+            {
+                cout << deq.front() << '\n';
+                deq.pop_front();
+            }
+            
+        }
+        else if(str == "pop_back")
+        {
+            if(deq.empty())
+            {
+                cout << "-1\n";
+            }
+            else
+            {
+                cout << deq.back() << '\n';
+                deq.pop_back();
             }
         }
-        else if (text[1] == 'o') {
-            if (text[4] == 'f') {
-                if (dq.empty()) cout << -1 << "\n";
-                else {
-                    cout << dq.front() << "\n";
-                    dq.pop_front();
-                }
+        else if(str == "size")
+        {
+            cout << deq.size() << '\n';
+        }
+        else if(str == "empty")
+        {
+            cout << deq.empty() << '\n';
+            
+        }
+        else if(str == "front")
+        {
+            if(deq.empty())
+            {
+                cout << "-1\n";
             }
-            else {
-                if (dq.empty()) cout << -1 << "\n";
-                else {
-                    cout << dq.back() << "\n";
-                    dq.pop_back();
-                }
+            else
+            {
+                cout << deq.front() << '\n';
             }
         }
-        else if (text == "size")
-            cout << dq.size() << "\n";
-        else if (text == "empty") {
-            if (dq.empty()) cout << 1 << "\n";
-            else cout << 0 << "\n";
+        else if(str == "back")
+        {
+            if(deq.empty())
+            {
+                cout << "-1\n";
+            }
+            else
+            {
+                cout << deq.back() << '\n';
+            }
         }
     }
 }
