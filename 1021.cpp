@@ -1,60 +1,58 @@
 #include <iostream>
-#include <algorithm>
 #include <deque>
-#include <string>
-#include <vector>
+
 using namespace std;
- 
-int main(int argc, char *argv[])
+
+int main()
 {
-	int n;
-	int find;
-	int num;
-	int index;
-	int count = 0;
-	deque<int> d;
- 
-	cin >> n;
-	cin >> find;
- 
-	for (int i = 1; i <= n; ++i) {
-		d.push_back(i);
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+
+	int N, M, count = 0, index = 0;;
+	cin >> N >> M;
+
+	deque<int> deq;
+
+	for(int i = 1; i <= N; ++i)
+	{
+		deq.push_back(i);	
 	}
- 
-	while (find--){
-		cin >> num;
- 
-		for (int i = 0; i < d.size(); ++i) {
-			if (d[i] == num) {
+
+	while(M--)
+	{
+		int temp;
+		cin >> temp;
+
+		for(int i = 0; i < deq.size(); ++i)
+		{
+			if(deq[i] == temp)
+			{
 				index = i;
 				break;
 			}
 		}
- 
-		if (index < d.size() - index) {
-			while (1) {
-				if (d.front() == num) {
-					d.pop_front();
-					break;
-				}
+
+		if(deq.size() - index > index)
+		{
+			while(deq.front() != temp)
+			{
+				deq.push_back(deq.front());
+				deq.pop_front();
 				++count;
-				d.push_back(d.front());
-				d.pop_front();
 			}
 		}
-		else {
-			while (1) {
-				if (d.front() == num) {
-					d.pop_front();
-					break;
-				}
+		else
+		{
+			while(deq.front() != temp)
+			{
+				deq.push_front(deq.back());
+				deq.pop_back();
 				++count;
-				d.push_front(d.back());
-				d.pop_back();
 			}
 		}
+		deq.pop_front();
 	}
-	cout << count << endl;
-	
-	return 0;
+
+	cout << count;
 }
