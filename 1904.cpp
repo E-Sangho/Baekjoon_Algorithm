@@ -2,8 +2,6 @@
 
 using namespace std;
 
-int tile[1000001];
-
 int main()
 {
     ios_base::sync_with_stdio(false);
@@ -12,13 +10,17 @@ int main()
 
     int N;
     cin >> N;
-
-    tile[1] = 1;
-    tile[2] = 2;
-    for(int i = 3; i <= N; ++i){
-        tile[i] = (tile[i-1] + tile[i-2]) % 15746;
+    if(N <= 3) cout << N;
+    else{
+        int a = 1, b = 2, c;
+        
+        for(int i = 3; i <= N; ++i){
+            c = (a + b) % 15746;
+            a = b;
+            b = c;
+        }
+    cout << c;
     }
-    cout << tile[N];
-
+    
     return 0;
 }
