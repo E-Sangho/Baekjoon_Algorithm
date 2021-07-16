@@ -1,38 +1,33 @@
-#include <iostream>
+#include <stdio.h>
+#include <algorithm>
 
 using namespace std;
 
-int triangle[500][500];
 int dp[500][500];
-
-int max(const int &x, const int &y){
-    return x > y ? x : y;
-}
 
 int main(){
     int n;
-    cin >> n;
+    scanf("%d", &n);
 
     for(int i = 0; i < n; ++i){
         for(int j = 0; j <= i; ++j){
-            cin >> triangle[i][j];
+            scanf("%d", &dp[i][j]);
         }
     }
 
-    dp[0][0] = triangle[0][0];
-    dp[1][0] = triangle[0][0] + max(triangle[1][0], triangle[1][1]);
     for(int i = 1; i < n; ++i){
-        for(int j = 0; j < i; ++j){
-            dp[i+1][j] = dp[i][j] + max(triangle[i+1][j], triangle[i+1][j+1]);
-            dp[i+1][j+1] = dp[i][j] + max(triangle[i+1][j+1], triangle[i+1][j+2]);
+        dp[i][0] = dp[i-1][0] + dp[i][0];
+        dp[i][i] = dp[i-1][i-1] + dp[i][i];
+        for(int j = 1; j < i; ++j){
+            dp[i][j] = max(dp[i-1][j-1], dp[i-1][j]) + dp[i][j];
         }
     }
 
     int temp = dp[n-1][0];
 
-    for(int i = 1; i < n - 1; ++i){
+    for(int i = 1; i < n; ++i){
         temp = max(temp, dp[n-1][i]);
     }
-    cout << temp;
+    printf("%d",temp);
     return 0;
 }
