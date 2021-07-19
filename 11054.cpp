@@ -3,6 +3,13 @@
 using namespace std;
 
 int A[1001];
+int dp[1001];
+int dp2[1001];
+
+int max(const int &a, const int &b)
+{
+    return a > b ? a : b;
+}
 
 int main()
 {
@@ -17,6 +24,35 @@ int main()
     {
         cin >> A[i];
     }
+    for(int i = 1; i <= N; ++i)
+    {
+        for(int j = 1; j <= i; ++j)
+        {
+            if(A[j] < A[i])
+            {
+                dp[i] = max(dp[i], dp[j]);
+            }
+        }
+        ++dp[i];
+    }
     
+    for(int i = N; i >= 1; --i)
+    {
+        for(int j = N; j >= i; --j)
+        {
+            if(A[i] > A[j])
+            {
+                dp2[i] = max(dp2[i], dp2[j]);
+            }
+        }
+        ++dp2[i];
+    }
+
+    for(int i = 1; i <= N; ++i)
+    {
+        max_len = max(max_len, dp[i] + dp2[i]);
+    }
+
+    cout << max_len - 1;
     return 0;
 }
