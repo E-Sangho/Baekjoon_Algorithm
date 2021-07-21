@@ -1,5 +1,4 @@
 #include <iostream>
-#include <algorithm>
 
 using namespace std;
 
@@ -9,20 +8,15 @@ int main()
     cin.tie(NULL);
     cout.tie(NULL);
 
-    int n;
-    cin >> n;
-    int input[n], dp[n];
-    for(int i = 0; i < n; ++i)
-    {
-        cin >> input[i];
-    }
-    dp[0] = input[0];
-    int global_max = dp[0];
+    int n, seq, ans, input;
+    cin >> n >> seq;
+    ans = seq;
     for(int i = 1; i < n; ++i)
     {
-        dp[i] = dp[i-1] < 0 ? input[i] : dp[i-1] + input[i];
-        global_max = max(global_max, dp[i]);
+        cin >> input;
+        seq = seq < 0 ? input : seq + input;
+        ans = ans > seq ? ans : seq;
     }
-    cout << global_max;
+    cout << ans;
     return 0;
 }
