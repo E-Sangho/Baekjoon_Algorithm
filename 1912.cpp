@@ -20,10 +20,14 @@ int main()
     int global_max = dp[0];
     for(int i = 1; i < n; ++i)
     {
-        dp[i] = max(input[i], dp[i-1] + input[i]);
+        if(dp[i-1] < 0){
+            dp[i] = input[i];
+        }
+        else{
+            dp[i] = dp[i-1] + input[i];
+        }
         global_max = max(global_max, dp[i]);
     }
-    
     cout << global_max;
     return 0;
 }
