@@ -6,13 +6,12 @@ int main()
 {
     int sign = 1, number = 0, ans = 0;
     char oper;
-
-    while(1)
+    scanf("%d", &number);
+    while(scanf("%c", &oper) != EOF)
     {
-        scanf("%d%c", &number, &oper);
         ans = ans + number * sign;
         if(oper == '-') sign = -1;
-        else if(oper != '+') break;
+        scanf("%d", &number);
     }
     printf("%d", ans);
     return 0;
