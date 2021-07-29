@@ -1,61 +1,19 @@
-#include <iostream>
-#include <string>
+#include <stdio.h>
 
 using namespace std;
 
 int main()
 {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    cout.tie(NULL);
+    int sign = 1, number = 0, ans = 0;
+    char oper;
 
-    string s;
-    cin >> s;
-    int n =  s.length(), i = 0, number = 0, ans = 0;
-    char sign;
-
-    // get first number
-    while('0' <= s[i]  && s[i] <= '9')
+    while(1)
     {
-        number = number * 10 + (s[i] - '0');
-        ++i;
+        scanf("%d%c", &number, &oper);
+        ans = ans + number * sign;
+        if(oper == '-') sign = -1;
+        else if(oper != '+') break;
     }
-    ans = number;
-    number = 0;
-    while(i < n)
-    {
-
-        if(s[i] == '+')
-        {
-            if(sign == '-');
-            else sign = '+';
-            ++i;
-        }
-
-        else if(s[i] == '-')
-        {
-            sign = '-';
-            ++i;
-        }
-
-        while('0' <= s[i]  && s[i] <= '9')
-        {
-            number = number * 10 + (s[i] - '0');
-            ++i;
-        }
-
-        if(sign == '+')
-        {
-            ans = ans + number;
-            number = 0;
-        }
-
-        else if(sign == '-')
-        {
-            ans =  ans - number;
-            number = 0;
-        }
-    }
-    cout << ans;
+    printf("%d", ans);
     return 0;
 }
