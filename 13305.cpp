@@ -8,23 +8,17 @@ int main()
     cin.tie(NULL);
     cout.tie(NULL);
     
-    int N;
+    int N, price, min = 1e9 + 1;
     long long ans = 0;
     cin >> N;
-    long long price[N];
     int length[N-1];
     for(int i = 0; i < N-1; ++i) cin >> length[i];
-    for(int i = 0; i < N; ++i) cin >> price[i];
 
-    for(int i = 0; i < N - 1; ++i)
+    for(int i = 0; i < N-1; ++i)
     {
-        int present = i;
-        ans += length[i] * price[present];
-        while(price[present] < price[i+1] && i < N - 2)
-        {
-            ans += length[i+1] * price[present];
-            ++i;
-        }
+        cin >> price;
+        min = min < price ? min : price;
+        ans += (long long)min * length[i];
     }
     cout << ans;
     return 0;
