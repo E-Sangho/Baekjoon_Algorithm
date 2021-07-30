@@ -16,27 +16,24 @@ int main()
     {
         int N;
         cin >> N;
-        vector<pair<int, int>> v(N);
+        vector<int> v(N+1);
+        int document, interview;
         for(int n = 0; n < N; ++n)
         {
-            cin >> v[n].first >> v[n].second;
+            cin >> document >> interview;
+            v[document] = interview;
         }
-        sort(v.begin(), v.end());
 
-        int member = 1, current_ranking = v[0].second;
-        for(int i = 1; i < N; ++i)
+        int member = 1, current_ranking = v[1];
+        for(int i = 2; i <= N; ++i)
         {
-            if(v[i].second < current_ranking)
+            if(v[i] < current_ranking)
             {
-                current_ranking = v[i].second;
+                current_ranking = v[i];
                 ++member;
             }
         }
-        ans[t] = member;
-    }
-    for(int t = 0; t < T; ++t)
-    {
-        cout << ans[t] << '\n';
+        cout << member << '\n';
     }
 
     return 0;
