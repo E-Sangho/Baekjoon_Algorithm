@@ -13,21 +13,17 @@ int main()
     cin.tie(NULL);
     cout.tie(NULL);
     
-    int N, number = 0, ans = 0;
+    int N, ans = 0;
     cin >> N;
     int W[N];
     for(int i = 0; i < N; ++i) cin >> W[i];
     sort(W, W + N, compare);
-    ans = W[0];
-    number = 1;
-    for(int i = 1; i < N; ++i)
+    for(int i = 0; i < N; ++i)
     {
-        if(ans < W[i] * (number+1))
+        if(ans < W[i] * (i+1))
         {
-            ++number;
-            ans = W[i] * (number) ;
+            ans = W[i] * (i+1) ;
         }
-        else break;
     }
     cout << ans;
     return 0;
