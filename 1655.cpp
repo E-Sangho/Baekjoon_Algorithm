@@ -53,7 +53,7 @@ int main()
             }
             else pq_right.push(temp);
         }
-
+        /*
         else
         {
             if(pq_right.top() < temp)
@@ -64,7 +64,7 @@ int main()
             }
             else pq_left.push(temp);
         }
-
+        */
         cout << pq_left.top() << '\n';
     }
     
