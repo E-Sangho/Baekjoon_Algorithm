@@ -1,38 +1,37 @@
-#include<cstdio>
-#include<vector>
- 
+#include <iostream>
+#include <vector>
+
 using namespace std;
- 
-vector<vector<int>> map;
-bool visit[101] = { false };
-int computer_num, ans = 0;
- 
-void dfs(int x)
+
+int cnt = 0;
+vector<int> edge[101];
+bool visited[101] ={false,}; 
+
+void DFS(int parent)
 {
-    ans++;
-    visit[x] = true;
- 
-    for (int k = 0; k < map[x].size(); k++)
-    {
-        if (!visit[map[x][k]])dfs(map[x][k]);
+    visited[parent] = true;
+    for(auto child : edge[parent]){
+        if(!visited[child]){
+            DFS(child);
+            ++cnt;
+        }
     }
-    return;
 }
- 
+
 int main()
 {
-    int n, from, to;
-    scanf("%d %d", &computer_num, &n);
-    map.resize(computer_num + 1);
-    for (int i = 0; i < n; i++)
-    {
-        scanf("%d %d", &from, &to);
-        map[from].push_back(to);
-        map[to].push_back(from);
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
+    int num_com, num_pair, a, b;
+    cin >> num_com >> num_pair;
+    for(int i = 0; i < num_pair; ++i){
+        cin >> a >> b;
+        edge[a].push_back(b);
+        edge[b].push_back(a);
     }
- 
-    dfs(1);
- 
-    printf("%d", ans - 1);
-    return 0;
+    DFS(1);
+
+    cout << cnt;
 }
